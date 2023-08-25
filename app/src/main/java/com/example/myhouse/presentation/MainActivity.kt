@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myhouse.presentation.ui.theme.MyHouseTheme
+import com.example.myhouse.presentation.viewmodels.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +24,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MainActivityScreen()
                 }
             }
         }
     }
 }
 
+@Composable
+fun MainActivityScreen() {
+    val myViewModel: MainViewModel = koinViewModel()
+    Greeting("Android")
+
+}
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
