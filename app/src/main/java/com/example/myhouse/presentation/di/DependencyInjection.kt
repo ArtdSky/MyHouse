@@ -15,7 +15,6 @@ import com.example.myhouse.domain.usecase.cameras.GetAllRooms
 import com.example.myhouse.domain.usecase.doors.GetAllDoors
 import com.example.myhouse.presentation.viewmodels.MainViewModel
 import io.ktor.client.HttpClient
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
