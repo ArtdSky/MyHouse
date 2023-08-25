@@ -6,7 +6,7 @@ class GetAllRooms(
     private val camerasRepository: CamerasRepository
 ) {
 
-    suspend fun invoke() : List<String> {
+    suspend operator fun invoke() : List<String> {
         return camerasRepository.getAllRooms()
     }
 }

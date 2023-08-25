@@ -7,7 +7,7 @@ class GetAllDoors(
     private val doorsRepository: DoorsRepository
 ) {
 
-    suspend fun invoke() : List<Doors>{
+    suspend operator fun invoke() : List<Doors>{
         return doorsRepository.getAllDoors()
     }
 
