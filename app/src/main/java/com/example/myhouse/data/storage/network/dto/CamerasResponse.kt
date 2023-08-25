@@ -9,6 +9,12 @@ data class CamerasResponse(
 )
 
 @Serializable
+data class RoomData(
+    val room: List<String>,
+    val cameras: List<Camera>
+)
+
+@Serializable
 data class Camera(
     val name: String,
     val snapshot: String,
@@ -18,10 +24,6 @@ data class Camera(
     val rec: Boolean
 )
 
-@Serializable
-data class RoomData(
-    val room: List<String>,
-    val cameras: List<Camera>
-)
+
 
 

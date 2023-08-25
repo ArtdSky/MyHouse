@@ -2,7 +2,7 @@ package com.example.myhouse.domain.models
 
 
 
-data class Doors(
+data class Door(
     val name: String,
     val room: String?,
     val id: Int,
