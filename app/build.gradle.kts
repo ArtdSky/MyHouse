@@ -1,16 +1,18 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("io.realm.kotlin")
+    id("kotlinx-serialization")
 }
 
 android {
     namespace = "com.example.myhouse"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.myhouse"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -50,7 +52,31 @@ android {
 }
 
 dependencies {
+    //Ktor
+    val ktor_version="2.3.3"
+    implementation ("io.ktor:ktor-client-android:$ktor_version")
+    implementation ("io.ktor:ktor-client-core:$ktor_version")
+    implementation ("io.ktor:ktor-client-logging:$ktor_version")
+    implementation ("io.ktor:ktor-client-json:$ktor_version")
+    implementation ("io.ktor:ktor-client-serialization:$ktor_version")
 
+    // Serialization
+    val serialization_version = "1.6.0"
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+
+    //Realm
+    implementation ("io.realm.kotlin:library-base:1.10.0")
+    implementation ("io.realm.kotlin:library-sync:1.10.0")// If using Device Sync
+
+    //Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    //ViewModel & Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    //Navigation
+    val nav_version = "2.6.0"
+    implementation ("androidx.navigation:navigation-compose:$nav_version")
+
+    //Default
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")
