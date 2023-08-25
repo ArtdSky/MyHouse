@@ -52,6 +52,10 @@ android {
 }
 
 dependencies {
+    //Koin
+    val koin_version= "3.3.3"
+    implementation ("io.insert-koin:koin-androidx-compose:3.4.1")
+    implementation ("io.insert-koin:koin-core:$koin_version")
     //Ktor
     val ktor_version="2.3.3"
     implementation ("io.ktor:ktor-client-android:$ktor_version")
