@@ -59,10 +59,8 @@ dependencies {
     implementation ("io.ktor:ktor-client-logging:$ktor_version")
     implementation ("io.ktor:ktor-client-json:$ktor_version")
     implementation ("io.ktor:ktor-client-serialization:$ktor_version")
-
-    // Serialization
-    val serialization_version = "1.6.0"
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
 
     //Realm
     implementation ("io.realm.kotlin:library-base:1.10.0")
