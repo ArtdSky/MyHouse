@@ -48,9 +48,9 @@ class MainViewModel(
     val state: LiveData<ViewModelState> get() = _state
 
     init {
+        initRoomsData()
         initDoorsData()
         initCamerasData()
-        initRoomsData()
     }
 
 
