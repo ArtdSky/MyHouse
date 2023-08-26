@@ -190,6 +190,7 @@ class MainViewModel(
     fun refreshDoorsData() {
         viewModelScope.launch {
             try {
+                clearDoorsDb()
                 val doorsFromNet = getAllNetworkDoors()
                 doorsFromNet.forEach {
                     insertDoorsToDb(it)
@@ -204,6 +205,7 @@ class MainViewModel(
     fun refreshCamerasData() {
         viewModelScope.launch {
             try {
+                clearCamerasDb()
                 val camerasFromNet = getAllNetworkCameras()
                 camerasFromNet.forEach {
                     insertCameraToDb(it)
@@ -217,6 +219,7 @@ class MainViewModel(
 
     fun refreshRoomsData() {
         viewModelScope.launch {
+            clearRoomsDb()
             try {
                 val roomsFromNet = getAllNetworkRooms()
                 roomsFromNet.forEach {

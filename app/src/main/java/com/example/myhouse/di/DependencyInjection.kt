@@ -20,15 +20,18 @@ import com.example.myhouse.data.storage.network.NetworkService
 import com.example.myhouse.domain.repository.CamerasRepository
 import com.example.myhouse.domain.repository.DoorsRepository
 import com.example.myhouse.domain.repository.RoomsRepository
+import com.example.myhouse.domain.usecase.cameras.ClearCamerasDb
 import com.example.myhouse.domain.usecase.cameras.GetAllCamerasFromDb
 import com.example.myhouse.domain.usecase.cameras.GetAllNetworkCameras
 import com.example.myhouse.domain.usecase.cameras.GetAllNetworkRooms
 import com.example.myhouse.domain.usecase.cameras.InsertCameraToDb
 import com.example.myhouse.domain.usecase.cameras.UpdateCameraNameInDb
+import com.example.myhouse.domain.usecase.doors.ClearDoorsDb
 import com.example.myhouse.domain.usecase.doors.GetAllDoorsInDb
 import com.example.myhouse.domain.usecase.doors.GetAllNetworkDoors
 import com.example.myhouse.domain.usecase.doors.InsertDoorsToDb
 import com.example.myhouse.domain.usecase.doors.UpdateDoorsNameInDb
+import com.example.myhouse.domain.usecase.rooms.ClearRoomsDb
 import com.example.myhouse.domain.usecase.rooms.GetAllRoomFromDb
 import com.example.myhouse.domain.usecase.rooms.InsertRoomToDb
 import com.example.myhouse.presentation.viewmodels.MainViewModel
@@ -70,6 +73,9 @@ val DependencyInjection = module {
 
     factory { GetAllRoomFromDb(get()) }
     factory { InsertRoomToDb(get()) }
+    factory { ClearRoomsDb(get()) }
+    factory { ClearDoorsDb(get()) }
+    factory { ClearCamerasDb(get()) }
 
 
     // View Model
