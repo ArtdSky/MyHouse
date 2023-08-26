@@ -54,6 +54,7 @@ class MainViewModel(
             }
         }
     }
+
     fun getCamerasFromNetwork() {
         viewModelScope.launch {
             try {
@@ -64,6 +65,7 @@ class MainViewModel(
             }
         }
     }
+
     fun getRoomsFromNetwork() {
         viewModelScope.launch {
             try {
@@ -96,6 +98,7 @@ class MainViewModel(
             }
         }
     }
+
     fun getRoomsFromDb() {
         viewModelScope.launch {
             try {
@@ -110,9 +113,9 @@ class MainViewModel(
     fun addDoorsToDb() {
         viewModelScope.launch {
             try {
-                _state.value?.doors?.forEach{
+                _state.value?.doors?.forEach {
                     if (it != null) {
-                        insertDoorsToDb( it  )
+                        insertDoorsToDb(it)
                     }
                 }
             } catch (exception: Exception) {
@@ -124,9 +127,9 @@ class MainViewModel(
     fun addCamerasToDb() {
         viewModelScope.launch {
             try {
-                _state.value?.cameras?.forEach{
+                _state.value?.cameras?.forEach {
                     if (it != null) {
-                        insertCameraToDb( it  )
+                        insertCameraToDb(it)
                     }
                 }
             } catch (exception: Exception) {
@@ -138,9 +141,9 @@ class MainViewModel(
     fun addRoomsToDb() {
         viewModelScope.launch {
             try {
-                _state.value?.rooms?.forEach{
+                _state.value?.rooms?.forEach {
                     if (it != null) {
-                        insertRoomToDb( it  )
+                        insertRoomToDb(it)
                     }
                 }
             } catch (exception: Exception) {
@@ -152,7 +155,7 @@ class MainViewModel(
     fun updateDoorName(door: Door) {
         viewModelScope.launch {
             try {
-                updateDoorsNameInDb( door )
+                updateDoorsNameInDb(door)
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in updateDoorName: ${exception.message}")
             }
@@ -162,7 +165,7 @@ class MainViewModel(
     fun updateCameraName(camera: Camera) {
         viewModelScope.launch {
             try {
-                updateCameraNameInDb( camera )
+                updateCameraNameInDb(camera)
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in updateCameraName: ${exception.message}")
             }
@@ -170,5 +173,94 @@ class MainViewModel(
     }
 
 
+    fun refreshDoorsData() {
+        viewModelScope.launch {
+            try {
+                val doorsFromNet = getAllNetworkDoors()
+                doorsFromNet.forEach {
+                    insertDoorsToDb(it)
+                }
+                getDoorsFromDb()
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in refreshDoorsData: ${exception.message}")
+            }
+        }
+    }
 
+    fun refreshCamerasData() {
+        viewModelScope.launch {
+            try {
+                val camerasFromNet = getAllNetworkCameras()
+                camerasFromNet.forEach {
+                    insertCameraToDb(it)
+                }
+                getCamerasFromDb()
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in refreshCamerasData: ${exception.message}")
+            }
+        }
+    }
+
+    fun refreshRoomsData() {
+        viewModelScope.launch {
+            try {
+                val roomsFromNet = getAllNetworkRooms()
+                roomsFromNet.forEach {
+                    insertRoomToDb(it)
+                }
+                getRoomsFromDb()
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in refreshRoomsData: ${exception.message}")
+            }
+        }
+    }
+
+
+    fun initDoorsData() {
+        viewModelScope.launch {
+            try {
+                val doorsFromDb = getAllDoorsInDb()
+                if (doorsFromDb.isEmpty()) {
+                    getDoorsFromNetwork()
+                    addDoorsToDb()
+                } else {
+                    getDoorsFromDb()
+                }
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in initDoorsData: ${exception.message}")
+            }
+        }
+    }
+
+    fun initCamerasData() {
+        viewModelScope.launch {
+            try {
+                val camerasFromDb = getAllCamerasFromDb()
+                if (camerasFromDb.isEmpty()) {
+                    getCamerasFromNetwork()
+                    addCamerasToDb()
+                } else {
+                    getCamerasFromDb()
+                }
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in initCamerasData: ${exception.message}")
+            }
+        }
+    }
+
+    fun initRoomsData() {
+        viewModelScope.launch {
+            try {
+                val roomsFromDb = getAllRoomFromDb()
+                if (roomsFromDb.isEmpty()) {
+                    getRoomsFromNetwork()
+                    addRoomsToDb()
+                } else {
+                    getRoomsFromDb()
+                }
+            } catch (exception: Exception) {
+                Log.d(TAG, "Error in initRoomsData: ${exception.message}")
+            }
+        }
+    }
 }
