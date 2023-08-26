@@ -60,3 +60,14 @@ fun cameraToCameraEntity(camera: Camera): CameraEntity {
     }
 }
 
+fun cameraEntityToCamera(cameraEntity: CameraEntity): Camera {
+    return Camera(
+        name = cameraEntity.name ?: "",
+        room = cameraEntity.room,
+        id = cameraEntity.id ?: 0,
+        favorites = cameraEntity.favorites ?: false,
+        snapshot = cameraEntity.snapshot ?: "",
+        rec = cameraEntity.rec ?: false,
+    )
+}
+

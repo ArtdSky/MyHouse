@@ -39,6 +39,9 @@ class MainViewModel(
 
     init {
 //        getDoorsFromDb()
+        initDoorsData()
+        initCamerasData()
+        initRoomsData()
     }
 
     private val _state = MutableLiveData(ViewModelState())
