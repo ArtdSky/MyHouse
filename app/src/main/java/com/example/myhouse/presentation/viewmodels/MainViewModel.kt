@@ -19,6 +19,7 @@ import com.example.myhouse.domain.usecase.doors.UpdateDoorsNameInDb
 import com.example.myhouse.domain.usecase.rooms.GetAllRoomFromDb
 import com.example.myhouse.domain.usecase.rooms.InsertRoomToDb
 import com.example.myhouse.presentation.state.ViewModelState
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -37,15 +38,16 @@ class MainViewModel(
 
     private val TAG = "TAG-VM"
 
+    private val _state = MutableLiveData(ViewModelState())
+    val state: LiveData<ViewModelState> get() = _state
+
     init {
-//        getDoorsFromDb()
         initDoorsData()
         initCamerasData()
         initRoomsData()
     }
 
-    private val _state = MutableLiveData(ViewModelState())
-    val state: LiveData<ViewModelState> get() = _state
+
 
     fun getDoorsFromNetwork() {
         viewModelScope.launch {
@@ -84,6 +86,9 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 val res: List<Door> = getAllDoorsInDb()
+//                val res: List<Door> = viewModelScope.async {
+//                    getAllDoorsInDb()
+//                }.await()
                 _state.value = state.value?.copy(doors = res)
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in getDoorsFromDb: ${exception.message}")
@@ -224,8 +229,11 @@ class MainViewModel(
             try {
                 val doorsFromDb = getAllDoorsInDb()
                 if (doorsFromDb.isEmpty()) {
-                    getDoorsFromNetwork()
-                    addDoorsToDb()
+                    val res: List<Door> = getAllNetworkDoors()
+                    res.forEach {
+                        insertDoorsToDb(it)
+                    }
+                    getDoorsFromDb()
                 } else {
                     getDoorsFromDb()
                 }
