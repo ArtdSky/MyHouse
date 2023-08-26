@@ -86,6 +86,9 @@ val DependencyInjection = module {
             get(),
             get(),
             get(),
+            get(),
+            get(),
+            get(),
         )
     }
 

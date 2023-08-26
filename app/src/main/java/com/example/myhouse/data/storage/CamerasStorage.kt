@@ -10,4 +10,7 @@ interface CamerasStorage {
     suspend fun insertCameras(camerasEntity: CameraEntity): Boolean
     suspend fun updateCameraName(cameraEntity: CameraEntity): Boolean
     suspend fun getAllCameras(): List<CameraEntity>
+
+    suspend fun clearCamerasDb(): Boolean
+
 }

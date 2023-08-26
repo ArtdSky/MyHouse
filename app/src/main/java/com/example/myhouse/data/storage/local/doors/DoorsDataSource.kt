@@ -7,4 +7,6 @@ interface DoorsDataSource {
     suspend fun updateDoorName(doorEntity: DoorEntity): Boolean
     suspend fun getAllDoors(): List<DoorEntity>
 
+    suspend fun clearDoorsDb(): Boolean
+
 }

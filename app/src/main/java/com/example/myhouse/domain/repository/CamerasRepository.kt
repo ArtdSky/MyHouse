@@ -13,4 +13,5 @@ interface CamerasRepository {
     suspend fun insertCamerasToDb(camera: Camera): Boolean
     suspend fun updateCameraNameInDb(camera: Camera): Boolean
     suspend fun getAllCamerasFromDb(): List<Camera>
+    suspend fun clearCamerasDb(): Boolean
 }

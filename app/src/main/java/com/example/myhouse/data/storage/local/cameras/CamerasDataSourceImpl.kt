@@ -33,4 +33,16 @@ class CamerasDataSourceImpl(
     override suspend fun getAllCameras(): List<CameraEntity> {
         return realm.query<CameraEntity>().find()
     }
+
+    override suspend fun clearCamerasDb(): Boolean {
+        return try {
+            realm.write {
+                val res = query<CameraEntity>().find()
+                delete(res)
+            }
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
 }

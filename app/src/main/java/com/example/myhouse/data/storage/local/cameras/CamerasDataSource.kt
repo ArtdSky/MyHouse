@@ -6,4 +6,7 @@ interface CamerasDataSource {
     suspend fun updateCameraName(cameraEntity: CameraEntity): Boolean
     suspend fun getAllCameras(): List<CameraEntity>
 
+    suspend fun clearCamerasDb(): Boolean
+
+
 }

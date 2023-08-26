@@ -21,6 +21,10 @@ class CamerasRepositoryImpl(
         return res.map { cameraToDomain(it) }
     }
 
+    override suspend fun clearCamerasDb(): Boolean {
+        return camerasStorage.clearCamerasDb()
+    }
+
     override suspend fun insertCamerasToDb(camera: Camera): Boolean {
         val cameraEntity = cameraToCameraEntity(camera)
         return camerasStorage.insertCameras(cameraEntity)

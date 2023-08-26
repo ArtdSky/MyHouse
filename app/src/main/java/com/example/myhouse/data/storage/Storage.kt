@@ -33,6 +33,18 @@ class Storage(
         return camerasDataSource.insertCameras(camerasEntity)
     }
 
+    override suspend fun clearCamerasDb(): Boolean {
+        return camerasDataSource.clearCamerasDb()
+    }
+
+    override suspend fun clearDoorsDb(): Boolean {
+        return doorsDataSource.clearDoorsDb()
+    }
+
+    override suspend fun clearRoomsDb(): Boolean {
+       return roomDataSource.clearRoomsDb()
+    }
+
     override suspend fun insertDoors(doorEntity: DoorEntity): Boolean {
         return doorsDataSource.insertDoor(doorEntity)
     }

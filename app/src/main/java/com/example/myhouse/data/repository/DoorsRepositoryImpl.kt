@@ -15,6 +15,10 @@ class DoorsRepositoryImpl(
         return doorsStorage.insertDoors(doorEntity)
     }
 
+    override suspend fun clearDoorsDb(): Boolean {
+        return doorsStorage.clearDoorsDb()
+    }
+
     override suspend fun updateDoorsNameInDb(door: Door): Boolean {
         val doorEntity = doorToDoorEntity(door)
         return doorsStorage.updateDoorsName(doorEntity)

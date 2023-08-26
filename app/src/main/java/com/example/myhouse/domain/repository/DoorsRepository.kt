@@ -11,4 +11,7 @@ interface DoorsRepository {
     suspend fun updateDoorsNameInDb(door: Door): Boolean
 
     suspend fun getAllDoorsInDb(): List<Door>
+
+    suspend fun clearDoorsDb(): Boolean
+
 }

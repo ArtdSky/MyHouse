@@ -12,4 +12,7 @@ interface DoorsStorage {
     suspend fun updateDoorsName(doorEntity: DoorEntity): Boolean
     suspend fun getAllDoors(): List<DoorEntity>
 
+    suspend fun clearDoorsDb(): Boolean
+
+
 }

@@ -14,6 +14,10 @@ class RoomRepositoryImpl(
         })
     }
 
+    override suspend fun clearRoomsDb(): Boolean {
+        return roomsStorage.clearRoomsDb()
+    }
+
     override suspend fun getAllRoomFromDb(): List<String> {
         val roomEntitys = roomsStorage.getAllRooms()
         return roomEntitys.map { it.name.toString() }

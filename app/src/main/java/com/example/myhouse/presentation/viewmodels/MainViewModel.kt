@@ -7,15 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myhouse.domain.models.Camera
 import com.example.myhouse.domain.models.Door
+import com.example.myhouse.domain.usecase.cameras.ClearCamerasDb
 import com.example.myhouse.domain.usecase.cameras.GetAllCamerasFromDb
 import com.example.myhouse.domain.usecase.cameras.GetAllNetworkCameras
 import com.example.myhouse.domain.usecase.cameras.GetAllNetworkRooms
 import com.example.myhouse.domain.usecase.cameras.InsertCameraToDb
 import com.example.myhouse.domain.usecase.cameras.UpdateCameraNameInDb
+import com.example.myhouse.domain.usecase.doors.ClearDoorsDb
 import com.example.myhouse.domain.usecase.doors.GetAllDoorsInDb
 import com.example.myhouse.domain.usecase.doors.GetAllNetworkDoors
 import com.example.myhouse.domain.usecase.doors.InsertDoorsToDb
 import com.example.myhouse.domain.usecase.doors.UpdateDoorsNameInDb
+import com.example.myhouse.domain.usecase.rooms.ClearRoomsDb
 import com.example.myhouse.domain.usecase.rooms.GetAllRoomFromDb
 import com.example.myhouse.domain.usecase.rooms.InsertRoomToDb
 import com.example.myhouse.presentation.state.ViewModelState
@@ -33,7 +36,10 @@ class MainViewModel(
     private val insertDoorsToDb: InsertDoorsToDb,
     private val updateDoorsNameInDb: UpdateDoorsNameInDb,
     private val getAllRoomFromDb: GetAllRoomFromDb,
-    private val insertRoomToDb: InsertRoomToDb
+    private val insertRoomToDb: InsertRoomToDb,
+    private val clearCamerasDb: ClearCamerasDb,
+    private val clearDoorsDb: ClearDoorsDb,
+    private val clearRoomsDb: ClearRoomsDb
 ) : ViewModel() {
 
     private val TAG = "TAG-VM"
