@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.myhouse.presentation.navigation.NavState
 import com.example.myhouse.presentation.ui.theme.MyHouseTheme
 import com.example.myhouse.presentation.viewmodels.MainViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -20,13 +21,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyHouseTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    MainActivityScreen()
-                }
+                MainActivityScreen()
             }
         }
     }
@@ -35,23 +30,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityScreen() {
     val myViewModel: MainViewModel = koinViewModel()
-    val viewModelState = myViewModel.state.value
-    Log.d("TAG-MA", viewModelState.toString())
-    Greeting("Android")
+
+    NavState(myViewModel)
 
 }
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyHouseTheme {
-        Greeting("Android")
-    }
-}
