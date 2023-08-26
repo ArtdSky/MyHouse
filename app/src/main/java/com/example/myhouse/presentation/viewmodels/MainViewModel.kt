@@ -92,9 +92,6 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 val res: List<Door> = getAllDoorsInDb()
-//                val res: List<Door> = viewModelScope.async {
-//                    getAllDoorsInDb()
-//                }.await()
                 _state.value = state.value?.copy(doors = res)
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in getDoorsFromDb: ${exception.message}")
@@ -233,7 +230,7 @@ class MainViewModel(
     }
 
 
-    fun initDoorsData() {
+    private fun initDoorsData() {
         viewModelScope.launch {
             try {
                 val doorsFromDb = getAllDoorsInDb()
@@ -252,7 +249,7 @@ class MainViewModel(
         }
     }
 
-    fun initCamerasData() {
+    private fun initCamerasData() {
         viewModelScope.launch {
             try {
                 val camerasFromDb = getAllCamerasFromDb()
@@ -268,7 +265,7 @@ class MainViewModel(
         }
     }
 
-    fun initRoomsData() {
+    private fun initRoomsData() {
         viewModelScope.launch {
             try {
                 val roomsFromDb = getAllRoomFromDb()
