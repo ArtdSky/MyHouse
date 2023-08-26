@@ -39,6 +39,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kotlin {
+        jvmToolchain {
+            (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(8))
+        }
+    }
     buildFeatures {
         compose = true
     }
@@ -53,6 +58,8 @@ android {
 }
 
 dependencies {
+    //LiveData
+    implementation("androidx.compose.runtime:runtime-livedata:1.5.0")
     //Koin
     val koin_version= "3.3.3"
     implementation ("io.insert-koin:koin-androidx-compose:3.4.1")

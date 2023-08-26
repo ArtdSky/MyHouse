@@ -1,6 +1,7 @@
 package com.example.myhouse.presentation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,6 +35,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainActivityScreen() {
     val myViewModel: MainViewModel = koinViewModel()
+    val viewModelState = myViewModel.state.value
+    Log.d("TAG-MA", viewModelState.toString())
     Greeting("Android")
 
 }
