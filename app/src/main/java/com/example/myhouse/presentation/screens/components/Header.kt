@@ -39,7 +39,7 @@ fun Header(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top,
-        modifier = Modifier.fillMaxSize()
+//        modifier = Modifier.fillMaxSize()
     ) {
         Box(
             modifier = Modifier

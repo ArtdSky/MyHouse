@@ -58,6 +58,8 @@ android {
 }
 
 dependencies {
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.2.2")
     //LiveData
     implementation("androidx.compose.runtime:runtime-livedata:1.5.0")
     //Koin
