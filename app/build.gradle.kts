@@ -58,6 +58,8 @@ android {
 }
 
 dependencies {
+    //material2
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.27.0")
     //Coil
     implementation("io.coil-kt:coil-compose:2.2.2")
     //LiveData
