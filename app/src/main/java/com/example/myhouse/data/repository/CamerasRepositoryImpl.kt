@@ -1,5 +1,6 @@
 package com.example.myhouse.data.repository
 
+import android.util.Log
 import com.example.myhouse.data.storage.CamerasStorage
 import com.example.myhouse.data.utils.cameraEntityToCamera
 import com.example.myhouse.data.utils.cameraToCameraEntity

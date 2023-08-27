@@ -23,7 +23,7 @@ class DoorsDataSourceImpl(
         return try {
             realm.write {
                 val queriedDoorEntity =
-                    query<DoorEntity>(query = "_id == $0", doorEntity.id).first().find()
+                    query<DoorEntity>(query = "id == $0", doorEntity.id).first().find()
                 queriedDoorEntity?.name = doorEntity.name
             }
             true

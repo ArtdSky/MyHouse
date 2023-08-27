@@ -66,7 +66,7 @@ class MainViewModel(
         }
     }
 
-    fun getCamerasFromNetwork() {
+    private fun getCamerasFromNetwork() {
         viewModelScope.launch {
             try {
                 val res: List<Camera> = getAllNetworkCameras()
@@ -77,7 +77,7 @@ class MainViewModel(
         }
     }
 
-    fun getRoomsFromNetwork() {
+    private fun getRoomsFromNetwork() {
         viewModelScope.launch {
             try {
                 val res: List<String> = getAllNetworkRooms()
@@ -88,7 +88,7 @@ class MainViewModel(
         }
     }
 
-    fun getDoorsFromDb() {
+    private fun getDoorsFromDb() {
         viewModelScope.launch {
             try {
                 val res: List<Door> = getAllDoorsInDb()
@@ -99,18 +99,20 @@ class MainViewModel(
         }
     }
 
-    fun getCamerasFromDb() {
+    private fun getCamerasFromDb() {
         viewModelScope.launch {
             try {
                 val res: List<Camera> = getAllCamerasFromDb()
                 _state.value = state.value?.copy(cameras = res)
+                Log.d(TAG, "getCamerasFromDb cliked")
+
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in getCamerasFromDb: ${exception.message}")
             }
         }
     }
 
-    fun getRoomsFromDb() {
+    private fun getRoomsFromDb() {
         viewModelScope.launch {
             try {
                 val res: List<String> = getAllRoomFromDb()
@@ -135,7 +137,7 @@ class MainViewModel(
         }
     }
 
-    fun addCamerasToDb() {
+    private fun addCamerasToDb() {
         viewModelScope.launch {
             try {
                 _state.value?.cameras?.forEach {
@@ -149,7 +151,7 @@ class MainViewModel(
         }
     }
 
-    fun addRoomsToDb() {
+    private fun addRoomsToDb() {
         viewModelScope.launch {
             try {
                 _state.value?.rooms?.forEach {
@@ -167,6 +169,7 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 updateDoorsNameInDb(door)
+                getDoorsFromDb()
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in updateDoorName: ${exception.message}")
             }
@@ -177,6 +180,7 @@ class MainViewModel(
         viewModelScope.launch {
             try {
                 updateCameraNameInDb(camera)
+                getCamerasFromDb()
             } catch (exception: Exception) {
                 Log.d(TAG, "Error in updateCameraName: ${exception.message}")
             }
@@ -254,8 +258,11 @@ class MainViewModel(
             try {
                 val camerasFromDb = getAllCamerasFromDb()
                 if (camerasFromDb.isEmpty()) {
-                    getCamerasFromNetwork()
-                    addCamerasToDb()
+                    val res: List<Camera> = getAllNetworkCameras()
+                    res.forEach {
+                        insertCameraToDb(it)
+                    }
+                    getCamerasFromDb()
                 } else {
                     getCamerasFromDb()
                 }
@@ -270,8 +277,11 @@ class MainViewModel(
             try {
                 val roomsFromDb = getAllRoomFromDb()
                 if (roomsFromDb.isEmpty()) {
-                    getRoomsFromNetwork()
-                    addRoomsToDb()
+                    val res: List<String> = getAllNetworkRooms()
+                    res.forEach {
+                        insertRoomToDb(it)
+                    }
+                    getRoomsFromDb()
                 } else {
                     getRoomsFromDb()
                 }

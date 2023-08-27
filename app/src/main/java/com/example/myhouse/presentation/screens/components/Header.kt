@@ -80,7 +80,7 @@ fun Header(
                     )
                     .background(Color.White)
                     .clickable {
-
+                        navController.navigate(Screen.Cameras.route)
                     }
             ) {
                 Text(
@@ -107,7 +107,7 @@ fun Header(
                     )
                     .background(Color.White)
                     .clickable {
-
+                        navController.navigate(Screen.Doors.route)
                     }
             ) {
                 Text(

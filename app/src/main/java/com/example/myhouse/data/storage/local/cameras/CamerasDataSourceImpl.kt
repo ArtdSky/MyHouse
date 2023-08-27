@@ -1,5 +1,6 @@
 package com.example.myhouse.data.storage.local.cameras
 
+import android.util.Log
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 
@@ -31,7 +32,8 @@ class CamerasDataSourceImpl(
     }
 
     override suspend fun getAllCameras(): List<CameraEntity> {
-        return realm.query<CameraEntity>().find()
+        val res = realm.query<CameraEntity>().find()
+        return res
     }
 
     override suspend fun clearCamerasDb(): Boolean {
