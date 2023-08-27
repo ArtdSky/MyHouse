@@ -22,6 +22,8 @@ import com.example.myhouse.presentation.screens.components.DoorCard
 import com.example.myhouse.presentation.screens.components.EditDoorDialog
 import com.example.myhouse.presentation.screens.components.Header
 import com.example.myhouse.presentation.viewmodels.MainViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
 fun DoorsScreen(
@@ -37,46 +39,55 @@ fun DoorsScreen(
     val showDialog = remember { mutableStateOf(false) }
     val selectedDoor = remember { mutableStateOf<Door?>(null) }
 
-    Surface(modifier = Modifier.fillMaxSize()) {
-        if (showDialog.value) {
-            EditDoorDialog(
-                door = selectedDoor.value,
-                onConfirm = { updatedDoor ->
-                    vm.updateDoorName(updatedDoor)
+    val isRefreshing = remember { mutableStateOf(false) }
 
-                },
-                onDismiss = {
-                    showDialog.value = false
-                    selectedDoor.value = null
-                }
-            )
-        }
-        LazyColumn {
-            item {
-                Header(
-                    vm = vm,
-                    navController = navController,
-                    currentScreen = currentScreen
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing.value),
+        onRefresh = {
+            vm.refreshDoorsData()
+        },
+    ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            if (showDialog.value) {
+                EditDoorDialog(
+                    door = selectedDoor.value,
+                    onConfirm = { updatedDoor ->
+                        vm.updateDoorName(updatedDoor)
+
+                    },
+                    onDismiss = {
+                        showDialog.value = false
+                        selectedDoor.value = null
+                    }
                 )
             }
-
-            state?.doors?.forEach { door ->
+            LazyColumn {
                 item {
-                    DoorCard(
-                        name = door?.name ?: "",
-                        url = door?.snapshot,
-                        room = door?.room,
-                        id = door?.id,
-                        favorites = door?.favorites,
-                        pressedCardId = pressedCardId,
-                        onEditClick = { cardId ->
-                            val doorToEdit = state?.doors?.find { it?.id == cardId }
-                            if (doorToEdit != null) {
-                                selectedDoor.value = doorToEdit
-                                showDialog.value = true
-                            }
-                        }
+                    Header(
+                        vm = vm,
+                        navController = navController,
+                        currentScreen = currentScreen
                     )
+                }
+
+                state?.doors?.forEach { door ->
+                    item {
+                        DoorCard(
+                            name = door?.name ?: "",
+                            url = door?.snapshot,
+                            room = door?.room,
+                            id = door?.id,
+                            favorites = door?.favorites,
+                            pressedCardId = pressedCardId,
+                            onEditClick = { cardId ->
+                                val doorToEdit = state?.doors?.find { it?.id == cardId }
+                                if (doorToEdit != null) {
+                                    selectedDoor.value = doorToEdit
+                                    showDialog.value = true
+                                }
+                            }
+                        )
+                    }
                 }
             }
         }
