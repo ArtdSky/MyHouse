@@ -11,13 +11,14 @@
 
 ## UI и скриншоты
 
-<img src="assets/cameras_main.gif"  height="300"> 
 
-| Cameras Screen                                     | Doors Screen                                                   |
-|----------------------------------------------------|----------------------------------------------------------------|
- | <img src="assets/cameras_main.png" height="300">   | <img src="assets/door_main.png" height="300">                  |
- | <img src="assets/cameras_edit.png" height="300">   | <img src="assets/door_edit.png" height="300">                  |
- | <img src="assets/cameras_dialog.png" height="300"> | <img src="assets/door_dialog/detail_screen3.png" height="300"> |
+![Демонстрация приложения](img src="assets/cameras_main.gif)
+
+| Cameras Screen                                     | Doors Screen                                    |
+|----------------------------------------------------|-------------------------------------------------|
+ | <img src="assets/cameras_main.png" height="300">   | <img src="assets/door_main.png" height="300">   |
+ | <img src="assets/cameras_edit.png" height="300">   | <img src="assets/door_edit.png" height="300">   |
+ | <img src="assets/cameras_dialog.png" height="300"> | <img src="assets/door_dialog.png" height="300"> |
 
 
 ## Использованные технологии
